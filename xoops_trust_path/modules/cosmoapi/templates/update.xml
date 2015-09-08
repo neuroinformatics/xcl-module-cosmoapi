@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cosmodb name="<{$dirname|escape}>">
+<data data_id="<{$dataId|escape}>">
+<result>
+	<update><{if $result}>success<{else}>failure<{/if}></update>
+</result>
+</data>
+</cosmodb>

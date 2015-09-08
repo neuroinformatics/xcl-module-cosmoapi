@@ -1,0 +1,4 @@
+<?php
+
+$mytrustdirname = 'cosmoapi';
+

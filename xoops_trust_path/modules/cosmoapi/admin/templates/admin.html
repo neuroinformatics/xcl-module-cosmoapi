@@ -1,0 +1,8 @@
+<ul class="adminMenu">
+<{foreach item=menu from=$adminMenu}>
+<li><a href="<{$menu.link|escape}>"><{$menu.title|escape}></a></li>
+<{/foreach}>
+<{foreach item=menu from=$altsysMenu}>
+<li><a href="<{$menu.link|escape}>"><{$menu.title|escape}></a></li>
+<{/foreach}>
+</ul>

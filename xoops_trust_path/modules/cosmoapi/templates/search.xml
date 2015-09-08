@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cosmodb name="<{$dirname|escape}>">
+<request>
+<{foreach from=$criteria key=key item=value}>
+<criteria name="<{$key|escape}>"><{$value|escape}></criteria>
+<{/foreach}>
+</request>
+<results>
+<{foreach from=$dataIds key=dataId item=label}>
+<data data_id="<{$dataId|escape}>"><{$label|escape}></data>
+<{/foreach}>
+</results>
+</cosmodb>

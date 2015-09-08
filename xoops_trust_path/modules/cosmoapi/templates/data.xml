@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cosmodb name="<{$object->mDirname|escape}>">
+<data data_id="<{$object->mLabelId|escape}>">
+<label><{$object->mLabel|escape}></label>
+<author user_id="<{$object->mAuthor|escape}>"><{$object->mAuthor|xoops_user:'uname'}></author>
+<date><{$object->mRegDate|xoops_date_format:"%Y-%m-%d"}></date>
+<views><{$object->mViews}></views>
+<metadata>
+<{foreach from=$object->mComponents key=comp_id item=comp}>
+	<component comp_id="<{$comp_id}>" name="<{$comp->mName|escape}>"><{$comp->mValue|escape}></component>
+<{/foreach}>
+</metadata>
+<keywords>
+<{foreach from=$object->mKeywords key=kw_id item=keyword}>
+	<keyword keyword_id="<{$kw_id|escape}>"><{$keyword->mKeyword|escape}></keyword>
+<{/foreach}>
+</keywords>
+<items>
+<{foreach from=$object->mItems key=item_id item=item}>
+	<item item_id="<{$item->mItemId|escape}>" type="<{$item->mType|escape}>" path="<{$item->mPath|escape}>"><{$item->mName|escape}></item>
+<{/foreach}>
+</items>
+</data>
+</cosmodb>
