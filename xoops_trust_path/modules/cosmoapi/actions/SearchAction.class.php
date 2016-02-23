@@ -62,7 +62,7 @@ class Cosmoapi_SearchAction extends Cosmoapi_AbstractAction {
 		$keyword = $req->getRequest('keyword');
 		$this->mSearchCriteria['keyword'] = $keyword;
 		$this->mDataIds =& $this->mHandler->searchByKeyword($keyword);
-		if (!$this->mDataIds)
+		if ($this->mDataIds === false)
 			return $this->_getFrameViewStatus('ERROR');
 		return $this->_getFrameViewStatus('SUCCESS');
 	}
