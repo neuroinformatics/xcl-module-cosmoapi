@@ -195,9 +195,6 @@ abstract class Cosmoapi_AbstractAction {
 		$criteria->add(new Criteria('groupid', XOOPS_GROUP_ANONYMOUS, '!='));
 		$groups = $member_handler->getGroupList($criteria);
 		$constpref = '_MD_' . strtoupper($this->mAsset->mDirname);
-		if ($cnameUtils::isExtendedGroup()) {
-			$groups[0] = constant($constpref . '_LANG_GROUP_ADMIN');
-		}
 		ksort($groups);
 		return $groups;
 	}
