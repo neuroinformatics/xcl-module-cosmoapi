@@ -93,6 +93,16 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler {
 		return $obj;
 	}
 
+	public function getIds() {
+		$sql = sprintf('SELECT `label_id`,`label` FROM `%s`', $this->db->prefix($this->mDirname . '_master'));
+		if (($result = $this->db->query($sql)) === false)
+			return $ret;
+		while ($row = $this->db->fetchArray($result)) {
+			$ret[$row['label_id']] = $row['label'];
+		}
+		return $ret;
+	}
+
 	public function searchByKeyword($keyword) {
 		$kwHandler =& Cosmoapi_Utils::getTrustModuleHandler('keyword', COSMOAPI_TRUST_DIRNAME);
 		$kwHandler->setDirname($this->mDirname);
