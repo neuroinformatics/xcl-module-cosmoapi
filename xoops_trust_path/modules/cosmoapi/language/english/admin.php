@@ -1,11 +1,14 @@
 <?php
 
-if (!isset($mydirname)) exit();
+if (!isset($mydirname)) {
+    exit();
+}
 
-$constpref = '_AD_' . strtoupper($mydirname);
+$constpref = '_AD_'.strtoupper($mydirname);
 
-if (defined($constpref . '_LOADED')) return;
+if (defined($constpref.'_LOADED')) {
+    return;
+}
 
 // system
-define($constpref . '_LOADED', 1);
-
+define($constpref.'_LOADED', 1);
