@@ -307,7 +307,7 @@ class Cosmoapi_Module extends Legacy_ModuleAdapter
             die();
         }
         $classUtils = ucfirst($trustDirname).'_Utils';
-        $viewStatus = ($classUtils::getEnv('REQUEST_METHOD') == 'POST') ?  $this->mAction->execute() : $this->mAction->getDefaultView();
+        $viewStatus = ($classUtils::getEnv('REQUEST_METHOD') == 'POST') ? $this->mAction->execute() : $this->mAction->getDefaultView();
         if (in_array($viewStatus, $this->_mAllowViewNames)) {
             $methodName = 'executeView'.ucfirst($viewStatus);
             if (is_callable(array($this->mAction, $methodName))) {
