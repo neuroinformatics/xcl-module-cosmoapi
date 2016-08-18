@@ -15,6 +15,11 @@
 	<keyword keyword_id="<{$kw_id|escape}>"><{$keyword->mKeyword|escape}></keyword>
 <{/foreach}>
 </keywords>
+<thumbnails>
+<{foreach from=$object->mThumbnails item=thumbnail}>
+	<thumbnail><{$thumbnail|escape}></thumbnail>
+<{/foreach}>
+</thumbnails>
 <items>
 <{foreach from=$object->mItems key=item_id item=item}>
 	<item item_id="<{$item->mItemId|escape}>" type="<{$item->mType|escape}>" path="<{$item->mPath|escape}>"><{$item->mName|escape}></item>

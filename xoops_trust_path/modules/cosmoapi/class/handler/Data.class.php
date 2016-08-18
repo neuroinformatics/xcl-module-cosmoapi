@@ -12,6 +12,7 @@ class Cosmoapi_DataObject
     public $mViews;
     public $mComponents;
     public $mItems;
+    public $mThumbnails;
 
     public function __construct($dirname)
     {
@@ -32,6 +33,7 @@ class Cosmoapi_DataObject
         $this->_setKeywords($row['keyword']);
         $this->_setComponents();
         $this->_setItems();
+        $this->_setThumbnails();
 
         return true;
     }
@@ -62,6 +64,33 @@ class Cosmoapi_DataObject
         $itemHandler = &Cosmoapi_Utils::getTrustModuleHandler('item', COSMOAPI_TRUST_DIRNAME);
         $itemHandler->setDirname($this->mDirname);
         $this->mItems = $itemHandler->getListByLabelId($this->mLabelId);
+    }
+
+    private function _setThumbnails()
+    {
+        $fpath = XOOPS_ROOT_PATH.'/modules/'.$this->mDirname.'/extract/'.$this->mLabelId.'/thumbnail';
+        $this->mThumbnails = $this->_getFiles($fpath);
+    }
+
+    private function _getFiles($fpath)
+    {
+        $ret = array();
+        if ($dh = @opendir($fpath)) {
+            while ($fname = @readdir($dh)) {
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+                $sfpath = $fpath.'/'.$fname;
+                if (is_dir($sfpath)) {
+                    $ret = array_merge($ret, $this->_getFiles($sfpath));
+                } else {
+                    $ret[] = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $sfpath);
+                }
+            }
+            closedir($dh);
+        }
+
+        return $ret;
     }
 }
 
