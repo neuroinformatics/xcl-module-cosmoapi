@@ -6,6 +6,8 @@
 Web API implementation for CosmoDB
 
 ## Install
+- upload files to your XOOPS Cube Legacy installation
+- install `cosmoapi` module from XOOPS administration page
 
 ## Usage
 ## Functions
@@ -168,7 +170,7 @@ with `path=[FILE PATH]` and `file=[FILE(multipart/form-data)]` by POST method.
 <cosmodb name="newdb5">
 <data data_id="570">
 <result>
-<uload>success</upload>
+<upload>success</upload>
 </result>
 </data>
 </cosmodb>
