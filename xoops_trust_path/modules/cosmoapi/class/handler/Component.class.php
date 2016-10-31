@@ -67,6 +67,7 @@ class Cosmoapi_ComponentHandler
             $name = isset($this->mComponentMaster[$comp_id]) ? $this->mComponentMaster[$comp_id]['name'] : '';
             $ret[$comp_id] = new Cosmoapi_ComponentObject($row, $name);
         }
+        $this->db->freeRecordSet($result);
 
         return $ret;
     }
@@ -101,6 +102,7 @@ class Cosmoapi_ComponentHandler
             $comp_id = $row['comp_id'];
             $this->mComponentMaster[$comp_id] = $row;
         }
+        $this->db->freeRecordSet($result);
 
         return true;
     }

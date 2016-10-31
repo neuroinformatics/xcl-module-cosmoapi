@@ -138,6 +138,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
 
             return $obj;
         }
+        $this->db->freeRecordSet($result);
 
         return $obj;
     }
@@ -151,6 +152,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
         while ($row = $this->db->fetchArray($result)) {
             $ret[$row['label_id']] = $row['label'];
         }
+        $this->db->freeRecordSet($result);
 
         return $ret;
     }
@@ -175,6 +177,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
         while ($row = $this->db->fetchArray($result)) {
             $ret[$row['label_id']] = $row['label'];
         }
+        $this->db->freeRecordSet($result);
 
         return $ret;
     }

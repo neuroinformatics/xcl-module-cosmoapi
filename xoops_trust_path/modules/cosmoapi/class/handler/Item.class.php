@@ -67,6 +67,7 @@ class Cosmoapi_ItemHandler
         if (!$row) {
             return false;
         }
+        $this->db->freeRecordSet($result);
 
         return new Cosmoapi_ItemObject($row);
     }
@@ -82,6 +83,7 @@ class Cosmoapi_ItemHandler
             $item_id = $row['item_id'];
             $ret[$item_id] = new Cosmoapi_ItemObject($row);
         }
+        $this->db->freeRecordSet($result);
 
         return $ret;
     }
