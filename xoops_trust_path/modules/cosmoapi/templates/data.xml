@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cosmodb name="<{$object->mDirname|escape}>">
-<data data_id="<{$object->mLabelId|escape}>">
+<data data_id="<{$object->mLabelId|escape}>" url="<{$object->mUrl|escape}>">
 <label><{$object->mLabel|escape}></label>
 <author user_id="<{$object->mAuthor|escape}>"><{$object->mAuthor|xoops_user:'uname'}></author>
 <date><{$object->mRegDate|xoops_date_format:"%Y-%m-%d"}></date>

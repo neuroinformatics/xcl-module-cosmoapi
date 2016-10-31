@@ -4,6 +4,7 @@ class Cosmoapi_DataObject
 {
     public $mDirname;
     public $mLabelId;
+    public $mUrl;
     public $mLabel;
     public $mRegDate;
     public $mUserIds;
@@ -25,6 +26,7 @@ class Cosmoapi_DataObject
             return false;
         }
         $this->mLabelId = intval($row['label_id']);
+        $this->mUrl = XOOPS_URL.'/modules/'.$this->mDirname.'/detail.php?id='.$row['label_id'];
         $this->mLabel = $row['label'];
         $this->mRegDate = $row['reg_date'];
         $this->mUserIds = array_map('intval', explode(',', $row['users']));
