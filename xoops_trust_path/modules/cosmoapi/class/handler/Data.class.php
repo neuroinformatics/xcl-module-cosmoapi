@@ -53,6 +53,7 @@ class Cosmoapi_DataObject
                 $this->mKeywords[$kw_id] = $kwHandler->get($kw_id);
             }
         }
+        usort($this->mKeywords, array($this, '_sortKeyword'));
     }
 
     protected function _setComponents()
@@ -101,6 +102,40 @@ class Cosmoapi_DataObject
         }
 
         return $ret;
+    }
+
+    private function _sortKeyword($a, $b)
+    {
+        $kwHandler = &Cosmoapi_Utils::getTrustModuleHandler('keyword', COSMOAPI_TRUST_DIRNAME);
+        $kwHandler->setDirname($this->mDirname);
+        $aPath = $a->mPath;
+        $bPath = $b->mPath;
+        while (true) {
+            $aKwId = array_shift($aPath);
+            $bKwId = array_shift($bPath);
+            if (is_null($aKwId)) {
+                if (is_null($bKwId)) {
+                    if ($a->mSort == $b->mSort) {
+                        return 0;
+                    }
+
+                    return ($a->mSort < $b->mSort) ? -1 : 1;
+                }
+
+                return -1;
+            } elseif (is_null($bKwId)) {
+                return 1;
+            } elseif ($aKwId != $bKwId) {
+                $aKw = $kwHandler->get($aKwId);
+                $bKw = $kwHandler->get($bKwId);
+                if ($aKw->mSort == $bKw->mSort) {
+                    return 0;
+                }
+
+                return ($aKw->mSort < $bKw->mSort) ? -1 : 1;
+            }
+        }
+        // not reached
     }
 }
 
