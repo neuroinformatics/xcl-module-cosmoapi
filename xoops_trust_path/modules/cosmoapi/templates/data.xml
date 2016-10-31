@@ -25,5 +25,15 @@
 	<item item_id="<{$item->mItemId|escape}>" type="<{$item->mType|escape}>" path="<{$item->mPath|escape}>"><{$item->mName|escape}></item>
 <{/foreach}>
 </items>
+<comments>
+<{foreach from=$object->mComments key=topic_id item=topic}>
+	<topic topic_id="<{$topic->mTopicId|escape}>" com_id="<{$topic->mComId|escape}>" type="<{$topic->mType|escape}>">
+		<comment com_id="<{$topic->mComment->mComId|escape}>" pcom_id="<{$topic->mComment->mPcomId|escape}>" reg_date="<{$topic->mComment->mRegDate|escape}>" reg_user="<{$topic->mComment->mRegUser|escape}>" subject="<{$topic->mComment->mSubject|escape}>"><{$topic->mComment->mMessage|escape}></comment>
+<{foreach from=$topic->mReplies key=com_id item=comment}>
+		<comment com_id="<{$comment->mComId|escape}>" pcom_id="<{$comment->mPcomId|escape}>" reg_date="<{$comment->mRegDate|escape}>" reg_user="<{$comment->mRegUser|escape}>" subject="<{$comment->mSubject|escape}>"><{$comment->mMessage|escape}></comment>
+<{/foreach}>
+	</topic>
+<{/foreach}>
+</comments>
 </data>
 </cosmodb>

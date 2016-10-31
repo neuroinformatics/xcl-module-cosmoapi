@@ -34,6 +34,7 @@ class Cosmoapi_DataObject
         $this->_setComponents();
         $this->_setItems();
         $this->_setThumbnails();
+        $this->_setComments();
 
         return true;
     }
@@ -70,6 +71,13 @@ class Cosmoapi_DataObject
     {
         $fpath = XOOPS_ROOT_PATH.'/modules/'.$this->mDirname.'/extract/'.$this->mLabelId.'/thumbnail';
         $this->mThumbnails = $this->_getFiles($fpath);
+    }
+
+    private function _setComments()
+    {
+        $commentHandler = &Cosmoapi_Utils::getTrustModuleHandler('comment', COSMOAPI_TRUST_DIRNAME);
+        $commentHandler->setDirname($this->mDirname);
+        $this->mComments = $commentHandler->getCommentsByLabelId($this->mLabelId);
     }
 
     private function _getFiles($fpath)
