@@ -179,12 +179,6 @@ class Cosmoapi_Installer
      */
     public function executeInstall()
     {
-        if (!$this->_mForceMode && defined('LEGACY_WORKFLOW_DIRNAME') && LEGACY_WORKFLOW_DIRNAME != $this->_mXoopsModule->get('dirname')) {
-            $this->mLog->addError('LEGACY_WORKFLOW module already available');
-            $this->_processReport();
-
-            return false;
-        }
         $this->_installTables();
         if (!$this->_mForceMode && $this->mLog->hasError()) {
             $this->_processReport();
