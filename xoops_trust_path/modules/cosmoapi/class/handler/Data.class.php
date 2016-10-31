@@ -108,15 +108,15 @@ class Cosmoapi_DataObject
     {
         $kwHandler = &Cosmoapi_Utils::getTrustModuleHandler('keyword', COSMOAPI_TRUST_DIRNAME);
         $kwHandler->setDirname($this->mDirname);
-        $aPath = $a->mPath;
-        $bPath = $b->mPath;
+        $aPathId = $a->mPathId;
+        $bPathId = $b->mPathId;
         while (true) {
-            $aKwId = array_shift($aPath);
-            $bKwId = array_shift($bPath);
+            $aKwId = array_shift($aPathId);
+            $bKwId = array_shift($bPathId);
             if (is_null($aKwId)) {
                 if (is_null($bKwId)) {
                     if ($a->mSort == $b->mSort) {
-                        return 0;
+                        return ($a->mKeywordId < $b->mKeywordId) ? -1 : 1;
                     }
 
                     return ($a->mSort < $b->mSort) ? -1 : 1;
@@ -129,7 +129,7 @@ class Cosmoapi_DataObject
                 $aKw = $kwHandler->get($aKwId);
                 $bKw = $kwHandler->get($bKwId);
                 if ($aKw->mSort == $bKw->mSort) {
-                    return 0;
+                    return ($aKwId < $bKwId) ? -1 : 1;
                 }
 
                 return ($aKw->mSort < $bKw->mSort) ? -1 : 1;
