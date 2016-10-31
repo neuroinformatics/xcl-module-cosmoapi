@@ -6,6 +6,7 @@ class Cosmoapi_KeywordObject
     public $mKeywordId;
     public $mKeyword;
     public $mSort;
+    public $mPathId;
     public $mPath;
 
     public function __construct($row)
@@ -16,7 +17,7 @@ class Cosmoapi_KeywordObject
         $this->mKeywordId = $row['kw_id'];
         $this->mKeyword = $row['keyword'];
         $this->mSort = $row['sort'];
-        $this->mPath = explode('/', substr($row['path'], 1, -1));
+        $this->mPathId = explode('/', substr($row['path'], 1, -1));
 
         return true;
     }
@@ -82,6 +83,14 @@ class Cosmoapi_KeywordHandler
         while ($row = $this->db->fetchArray($result)) {
             $kw_id = $row['kw_id'];
             $this->mKeywords[$kw_id] = new Cosmoapi_KeywordObject($row);
+        }
+        $this->db->freeRecordSet($result);
+        // update path
+        foreach ($this->mKeywords as &$obj) {
+            $obj->mPath = array();
+            foreach ($obj->mPathId as $kw_id) {
+                $obj->mPath[] = $this->mKeywords[$kw_id]->mKeyword;
+            }
         }
 
         return true;

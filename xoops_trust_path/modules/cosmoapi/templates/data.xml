@@ -12,7 +12,7 @@
 </metadata>
 <keywords>
 <{foreach from=$object->mKeywords key=kw_id item=keyword}>
-	<keyword keyword_id="<{$kw_id|escape}>"><{$keyword->mKeyword|escape}></keyword>
+	<keyword keyword_id="<{$kw_id|escape}>" path="<{"/"|implode:$keyword->mPathId|escape}>" sort="<{$keyword->mSort|escape}>"><{"/"|implode:$keyword->mPath|escape}>/<{$keyword->mKeyword|escape}></keyword>
 <{/foreach}>
 </keywords>
 <thumbnails>
