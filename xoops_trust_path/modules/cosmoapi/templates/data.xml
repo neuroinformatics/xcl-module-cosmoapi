@@ -35,5 +35,10 @@
 	</topic>
 <{/foreach}>
 </comments>
+<links>
+<{foreach from=$object->mLinks item=link}>
+	<link link_id="<{$link->mLinkId|escape}>" type="<{$link->mTypeStr|escape}>" uid="<{$link->mUid}>" name="<{$link->mName|escape}>" href="<{$link->mHref|escape}>" note="<{$link->mNote|escape}>" />
+<{/foreach}>
+</links>
 </data>
 </cosmodb>

@@ -127,6 +127,9 @@ Web API implementation for CosmoDB
 <comment com_id="571" pcom_id="0" reg_date="1423802516" reg_user="207" subject="Auther's Comment">BoND ID: 169 Author: Shibamoto</comment>
 </topic>
 </comments>
+<links>
+<link link_id="1" type="external" uid="207" name="Cockroach Optic Lobe" href="https://invbrain.neuroinf.jp/modules/htmldocs/IVBPF/Cockroach/Cockroach_optic_lobe.html" note="Comparative table"/>
+</links>
 </data>
 </cosmodb>
 ```

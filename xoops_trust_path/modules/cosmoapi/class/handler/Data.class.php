@@ -14,6 +14,8 @@ class Cosmoapi_DataObject
     public $mComponents;
     public $mItems;
     public $mThumbnails;
+    public $mComments;
+    public $mLinks;
 
     public function __construct($dirname)
     {
@@ -37,6 +39,7 @@ class Cosmoapi_DataObject
         $this->_setItems();
         $this->_setThumbnails();
         $this->_setComments();
+        $this->_setLinks();
 
         return true;
     }
@@ -81,6 +84,13 @@ class Cosmoapi_DataObject
         $commentHandler = &Cosmoapi_Utils::getTrustModuleHandler('comment', COSMOAPI_TRUST_DIRNAME);
         $commentHandler->setDirname($this->mDirname);
         $this->mComments = $commentHandler->getCommentsByLabelId($this->mLabelId);
+    }
+
+    private function _setLinks()
+    {
+        $linkHandler = &Cosmoapi_Utils::getTrustModuleHandler('link', COSMOAPI_TRUST_DIRNAME);
+        $linkHandler->setDirname($this->mDirname);
+        $this->mLinks = $linkHandler->getLinksByLabelId($this->mLabelId);
     }
 
     private function _getFiles($fpath)
