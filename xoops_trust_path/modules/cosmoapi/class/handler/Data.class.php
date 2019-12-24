@@ -107,7 +107,7 @@ class Cosmoapi_DataObject
                 } else {
                     $scfpath = str_replace('/thumbnail/', '/caption/', $sfpath);
                     $scfpath = preg_replace('/\.([a-z]+)$/i', '.txt', $scfpath);
-                    $caption = file_exists($fpath) ? file_get_contents($scfpath) : '';
+                    $caption = file_exists($scfpath) ? file_get_contents($scfpath) : '';
                     $ret[] = array(
                         'url' => str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $sfpath),
                         'caption' => $caption,
