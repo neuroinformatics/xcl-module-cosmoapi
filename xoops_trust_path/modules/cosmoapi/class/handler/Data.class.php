@@ -24,7 +24,7 @@ class Cosmoapi_DataObject
 
     public function setArray($row)
     {
-        if ($row === false) {
+        if (false === $row) {
             return false;
         }
         $this->mLabelId = intval($row['label_id']);
@@ -52,7 +52,7 @@ class Cosmoapi_DataObject
         $this->mKeywords = array();
         foreach ($keywords as $keyword) {
             $kw_id = intval(preg_replace('/\[([0-9]+)\]/', '$1', $keyword));
-            if ($kw_id != 0) {
+            if (0 != $kw_id) {
                 $this->mKeywords[$kw_id] = $kwHandler->get($kw_id);
             }
         }
@@ -76,7 +76,7 @@ class Cosmoapi_DataObject
     private function _setThumbnails()
     {
         $fpath = XOOPS_ROOT_PATH.'/modules/'.$this->mDirname.'/extract/'.$this->mLabelId.'/thumbnail';
-        $this->mThumbnails = $this->_getFiles($fpath);
+        $this->mThumbnails = $this->_getThumbnailFiles($fpath);
     }
 
     private function _setComments()
@@ -93,19 +93,25 @@ class Cosmoapi_DataObject
         $this->mLinks = $linkHandler->getLinksByLabelId($this->mLabelId);
     }
 
-    private function _getFiles($fpath)
+    private function _getThumbnailFiles($fpath)
     {
         $ret = array();
         if ($dh = @opendir($fpath)) {
             while ($fname = @readdir($dh)) {
-                if ($fname == '.' || $fname == '..') {
+                if ('.' == $fname || '..' == $fname) {
                     continue;
                 }
                 $sfpath = $fpath.'/'.$fname;
                 if (is_dir($sfpath)) {
-                    $ret = array_merge($ret, $this->_getFiles($sfpath));
+                    $ret = array_merge($ret, $this->_getThumbnailFiles($sfpath));
                 } else {
-                    $ret[] = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $sfpath);
+                    $scfpath = str_replace('/thumbnail/', '/caption/', $sfpath);
+                    $scfpath = preg_replace('/\.([a-z]+)$/i', '.txt', $scfpath);
+                    $caption = file_exists($fpath) ? file_get_contents($scfpath) : '';
+                    $ret[] = array(
+                        'url' => str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $sfpath),
+                        'caption' => $caption,
+                    );
                 }
             }
             closedir($dh);
@@ -182,7 +188,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
     {
         $obj = new Cosmoapi_DataObject($this->mDirname);
         $sql = sprintf('SELECT * FROM `%s` WHERE `label_id`=%u', $this->db->prefix($this->mDirname.'_master'), $label_id);
-        if (($result = $this->db->query($sql)) === false) {
+        if (false === ($result = $this->db->query($sql))) {
             $obj = null;
 
             return $obj;
@@ -201,7 +207,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
     public function getIds()
     {
         $sql = sprintf('SELECT `label_id`,`label` FROM `%s`', $this->db->prefix($this->mDirname.'_master'));
-        if (($result = $this->db->query($sql)) === false) {
+        if (false === ($result = $this->db->query($sql))) {
             return $ret;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -226,7 +232,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
             $kwArr[] = '['.$kw_id.']';
         }
         $sql = sprintf('SELECT `label_id`,`label` FROM `%s` WHERE `keyword` LIKE \'%%%s%%\'', $this->db->prefix($this->mDirname.'_master'), implode(',', $kwArr));
-        if (($result = $this->db->query($sql)) === false) {
+        if (false === ($result = $this->db->query($sql))) {
             return $ret;
         }
         while ($row = $this->db->fetchArray($result)) {
@@ -242,7 +248,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
         $itemHandler = &Cosmoapi_Utils::getTrustModuleHandler('item', COSMOAPI_TRUST_DIRNAME);
         $itemHandler->setDirname($this->mDirname);
         $itemObj = $itemHandler->get($item_id);
-        if (!$itemObj || $itemObj->mType != 'file') {
+        if (!$itemObj || 'file' != $itemObj->mType) {
             return false;
         }
         $path = sprintf('%s/modules/%s/extract/%u/data/%s', XOOPS_ROOT_PATH, $this->mDirname, $itemObj->mLabelId, (!empty($itemObj->mPath) ? $itemObj->mPath.'/' : '').$itemObj->mName);
@@ -264,6 +270,7 @@ class Cosmoapi_DataHandler extends XoopsObjectHandler
     public function insert(&$dataObj)
     {
     }
+
     public function delete(&$dataObj)
     {
     }

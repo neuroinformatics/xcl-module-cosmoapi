@@ -17,7 +17,10 @@
 </keywords>
 <thumbnails>
 <{foreach from=$object->mThumbnails item=thumbnail}>
-	<thumbnail><{$thumbnail|escape}></thumbnail>
+	<thumbnail>
+		<url><{$thumbnail.url|escape}></url>
+		<caption><{$thumbnail.caption|escape}></caption>
+	</thumbnail>
 <{/foreach}>
 </thumbnails>
 <items>

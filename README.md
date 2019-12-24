@@ -112,7 +112,8 @@ Web API implementation for CosmoDB
 </keywords>
 <thumbnails>
 <thumbnail>
-[XOOPS_URL]/modules/newdb5/extract/570/thumbnail/mor/010910_1f4z_sh.jpg
+<url>[XOOPS_URL]/modules/newdb5/extract/570/thumbnail/mor/010910_1f4z_sh.jpg</url>
+<caption>Shibamoto Some rights reserved (CC:BY-NC-SA).</caption>
 </thumbnail>
 </thumbnails>
 <items>

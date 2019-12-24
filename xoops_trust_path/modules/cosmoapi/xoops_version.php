@@ -22,7 +22,7 @@ require_once dirname(__FILE__).'/class/Utils.class.php';
 // Define a basic manifesto.
 //
 $modversion['name'] = constant($constpref.'_NAME');
-$modversion['version'] = 1.0;
+$modversion['version'] = 1.01;
 $modversion['description'] = constant($constpref.'_DESC');
 $modversion['author'] = constant($constpref.'_AUTHOR');
 $modversion['credits'] = constant($constpref.'_CREDITS');
