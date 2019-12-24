@@ -40,7 +40,7 @@ class Cosmoapi_CommentTopicObject
             return false;
         }
         $this->mTopicId = $row['topic_id'];
-        $this->mLableId = $row['label_id'];
+        $this->mLabelId = $row['label_id'];
         $this->mComId = $row['com_id'];
         $this->mType = $row['type'];
 

@@ -13,7 +13,7 @@ class Cosmoapi_ComponentObject
             return false;
         }
         $this->mCompId = $row['comp_id'];
-        $this->mLableId = $row['label_id'];
+        $this->mLabelId = $row['label_id'];
         $this->mValue = $row['value'];
         $this->mName = $name;
 
